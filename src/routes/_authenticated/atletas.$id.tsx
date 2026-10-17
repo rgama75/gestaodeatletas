@@ -52,7 +52,7 @@ function Page() {
       <Link to="/atletas" className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="size-4" />Atletas</Link>
       <Header a={a} />
       <Tabs defaultValue="dashboard" className="mt-6">
-        <div className="overflow-x-auto pb-1"><TabsList className="w-max">{TABS.map(([v, l]) => <TabsTrigger key={v} value={v}>{l}</TabsTrigger>)}</TabsList></div>
+        <TabsList className="h-auto w-full flex-wrap justify-start gap-1 p-1">{TABS.map(([v, l]) => <TabsTrigger key={v} value={v} className="min-h-10 flex-none">{l}</TabsTrigger>)}</TabsList>
         <TabsContent value="dashboard"><Dashboard a={a} /></TabsContent>
         <TabsContent value="perfil"><ProfileTab a={a} /></TabsContent>
         <TabsContent value="fisico" className="space-y-4">
@@ -128,7 +128,7 @@ function Header({ a }: { a: Athlete }) {
         </div>
         <div className="flex-1">
           <p className="text-sm uppercase tracking-[0.2em] text-primary">{p.posicao || "Posição não informada"}{p.camisa ? ` · #${p.camisa}` : ""}</p>
-          <h1 className="font-display text-4xl font-bold uppercase leading-none sm:text-5xl">{p.nomeEsportivo || p.nomeCompleto}</h1>
+          <h1 className="break-words font-display text-4xl font-bold uppercase leading-none sm:text-5xl">{p.nomeEsportivo || p.nomeCompleto}</h1>
           <p className="mt-1 text-muted-foreground">{p.nomeCompleto}{p.apelido ? ` · "${p.apelido}"` : ""}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {age !== null && <Badge variant="secondary">{age} anos</Badge>}

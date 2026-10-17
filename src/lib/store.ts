@@ -144,6 +144,11 @@ export const actions = {
       ? Object.keys({ ...old, ...rec }).filter((k) => k !== "id" && show(old[k]) !== show(rec[k])).map((k) => ({ athleteId: id, area: title, field: k, before: old[k], after: rec[k], confidential }))
       : [{ athleteId: id, area: title, field: "Novo registro", before: "", after: "Adicionado", confidential }]);
   },
+  async importRecords(id: string, section: string, recs: Rec[], title: string) {
+    const a = find(id); if (!a || !recs.length) return;
+    await actions.writeSection(a, section, [...(a.sections[section] ?? []), ...recs]);
+    await audit([{ athleteId: id, area: title, field: "Importação de planilha", before: "", after: `${recs.length} registro(s) adicionado(s)`, confidential: isFinanceSection(section) }]);
+  },
   async deleteRecord(id: string, section: string, recId: string, title: string) {
     const a = find(id); if (!a) return;
     const rec = (a.sections[section] ?? []).find((r) => r.id === recId);

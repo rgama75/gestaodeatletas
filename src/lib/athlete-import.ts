@@ -13,7 +13,7 @@ export const IMPORT_COLUMNS = [
 export type ImportProfile = Record<string, string | number>;
 export interface ImportRow { line: number; profile: ImportProfile; errors: string[] }
 
-function birthDate(value: unknown, date1904: boolean): string | null {
+export function birthDate(value: unknown, date1904: boolean): string | null {
   let date: Date;
   if (value instanceof Date) date = value;
   else if (typeof value === "number" && Number.isFinite(value)) {
@@ -67,11 +67,11 @@ export function mapImportRows(matrix: unknown[][], date1904 = false): ImportRow[
   });
 }
 
-export async function readImportFile(file: File): Promise<ImportRow[]> {
+export async function readSheetFile(file: File): Promise<{ matrix: unknown[][]; date1904: boolean }> {
   if (/\.csv$/i.test(file.name)) {
     const parsed = Papa.parse<string[]>(await file.text(), { skipEmptyLines: false });
     if (parsed.errors.length) throw new Error(`CSV inválido: ${parsed.errors[0]?.message}`);
-    return mapImportRows(parsed.data);
+    return { matrix: parsed.data, date1904: false };
   }
   if (!/\.xlsx$/i.test(file.name)) throw new Error("Escolha um arquivo .xlsx ou .csv.");
   const { default: ExcelJS } = await import("exceljs");
@@ -89,7 +89,12 @@ export async function readImportFile(file: File): Promise<ImportRow[]> {
     }
     matrix.push(values);
   }
-  return mapImportRows(matrix, workbook.properties.date1904);
+  return { matrix, date1904: workbook.properties.date1904 };
+}
+
+export async function readImportFile(file: File): Promise<ImportRow[]> {
+  const { matrix, date1904 } = await readSheetFile(file);
+  return mapImportRows(matrix, date1904);
 }
 
 export async function importValidRows(rows: ImportRow[], create: (profile: ImportProfile) => Promise<unknown>) {

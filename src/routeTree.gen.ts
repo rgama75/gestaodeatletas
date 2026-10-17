@@ -18,6 +18,7 @@ import { Route as AuthenticatedHistoricoRouteImport } from './routes/_authentica
 import { Route as AuthenticatedUsuariosRouteImport } from './routes/_authenticated/usuarios'
 import { Route as AuthenticatedAtletasIndexRouteImport } from './routes/_authenticated/atletas.index'
 import { Route as AuthenticatedAtletasIdRouteImport } from './routes/_authenticated/atletas.$id'
+import { Route as AuthenticatedTimesNomeRouteImport } from './routes/_authenticated/times.$nome'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const AuthenticatedAtletasIdRoute = AuthenticatedAtletasIdRouteImport.update({
   path: '/atletas/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTimesNomeRoute = AuthenticatedTimesNomeRouteImport.update({
+  id: '/times/$nome',
+  path: '/times/$nome',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/historico': typeof AuthenticatedHistoricoRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
   '/atletas/$id': typeof AuthenticatedAtletasIdRoute
+  '/times/$nome': typeof AuthenticatedTimesNomeRoute
   '/atletas/': typeof AuthenticatedAtletasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/historico': typeof AuthenticatedHistoricoRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
   '/atletas/$id': typeof AuthenticatedAtletasIdRoute
+  '/times/$nome': typeof AuthenticatedTimesNomeRoute
   '/atletas': typeof AuthenticatedAtletasIndexRoute
 }
 export interface FileRoutesById {
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/_authenticated/historico': typeof AuthenticatedHistoricoRoute
   '/_authenticated/usuarios': typeof AuthenticatedUsuariosRoute
   '/_authenticated/atletas/$id': typeof AuthenticatedAtletasIdRoute
+  '/_authenticated/times/$nome': typeof AuthenticatedTimesNomeRoute
   '/_authenticated/atletas/': typeof AuthenticatedAtletasIndexRoute
 }
 export interface FileRouteTypes {
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/historico'
     | '/usuarios'
     | '/atletas/$id'
+    | '/times/$nome'
     | '/atletas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/historico'
     | '/usuarios'
     | '/atletas/$id'
+    | '/times/$nome'
     | '/atletas'
   id:
     | '__root__'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/_authenticated/historico'
     | '/_authenticated/usuarios'
     | '/_authenticated/atletas/$id'
+    | '/_authenticated/times/$nome'
     | '/_authenticated/atletas/'
   fileRoutesById: FileRoutesById
 }
@@ -203,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAtletasIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/times/$nome': {
+      id: '/_authenticated/times/$nome'
+      path: '/times/$nome'
+      fullPath: '/times/$nome'
+      preLoaderRoute: typeof AuthenticatedTimesNomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -211,6 +230,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHistoricoRoute: typeof AuthenticatedHistoricoRoute
   AuthenticatedUsuariosRoute: typeof AuthenticatedUsuariosRoute
   AuthenticatedAtletasIdRoute: typeof AuthenticatedAtletasIdRoute
+  AuthenticatedTimesNomeRoute: typeof AuthenticatedTimesNomeRoute
   AuthenticatedAtletasIndexRoute: typeof AuthenticatedAtletasIndexRoute
 }
 
@@ -219,6 +239,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHistoricoRoute: AuthenticatedHistoricoRoute,
   AuthenticatedUsuariosRoute: AuthenticatedUsuariosRoute,
   AuthenticatedAtletasIdRoute: AuthenticatedAtletasIdRoute,
+  AuthenticatedTimesNomeRoute: AuthenticatedTimesNomeRoute,
   AuthenticatedAtletasIndexRoute: AuthenticatedAtletasIndexRoute,
 }
 

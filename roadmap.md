@@ -1,0 +1,3 @@
+- [ ] Parse and validate Excel/CSV profiles with focused tests.
+- [ ] Add import dialog, preview, result, and template to athlete list and Equipe.
+- [ ] Verify authenticated import, template download, and mobile layout.

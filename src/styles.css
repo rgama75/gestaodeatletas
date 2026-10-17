@@ -1,0 +1,18 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #f4f6f8; color: #1a2330; }
+.centro { text-align: center; margin-top: 4rem; }
+.cartao { max-width: 360px; margin: 4rem auto; padding: 2rem; background: #fff; border-radius: 12px; display: flex; flex-direction: column; gap: .75rem; box-shadow: 0 2px 12px #0001; }
+.cartao h1, .cartao h2 { margin: 0; }
+.cartao h2 { font-size: 1rem; font-weight: 500; color: #5b6676; }
+.pagina { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+.pagina header { display: flex; align-items: center; gap: 1rem; }
+.pagina header h1 { flex: 1; }
+.linha { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1rem 0; }
+.linha input { flex: 1; min-width: 140px; }
+input { padding: .6rem; border: 1px solid #cdd5df; border-radius: 8px; font: inherit; }
+button { padding: .6rem 1rem; border: 0; border-radius: 8px; background: #1f6feb; color: #fff; font: inherit; cursor: pointer; }
+button:disabled { opacity: .6; }
+button.link { background: none; color: #1f6feb; padding: .3rem; }
+table { width: 100%; background: #fff; border-collapse: collapse; border-radius: 8px; overflow: hidden; }
+th, td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid #e6ebf1; }
+.erro { color: #c62828; margin: 0; }

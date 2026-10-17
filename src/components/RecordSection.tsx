@@ -10,6 +10,8 @@ import { Lock, Pencil, Plus, Star, Trash2 } from "lucide-react";
 import { SECTIONS } from "@/lib/schema";
 import { actions, canSeeFinance, uid, useDB, type Athlete, type Rec } from "@/lib/store";
 import { FileCtx, RecordForm, showValue } from "./fields";
+import { SectionImportDialog } from "./SectionImportDialog";
+import { canImportSection } from "@/lib/record-import";
 import { openFile } from "@/lib/store";
 import { toast } from "sonner";
 
@@ -42,7 +44,7 @@ export function RecordSection({ athlete, section, addLabel, chronological = "des
           <CardTitle className="font-display text-2xl flex items-center gap-2">{title ?? def.title}{def.confidential && <Badge variant="outline" className="gap-1"><Lock className="size-3" />Confidencial</Badge>}</CardTitle>
           {def.description && <CardDescription>{def.description}</CardDescription>}
         </div>
-        <Button onClick={() => setEditing({ id: uid() })}><Plus className="size-4" />{addLabel ?? "Adicionar"}</Button>
+        <div className="flex flex-wrap gap-2">{canImportSection(def) && <SectionImportDialog athlete={athlete} section={section} />}<Button className="min-h-11" onClick={() => setEditing({ id: uid() })}><Plus className="size-4" />{addLabel ?? "Adicionar"}</Button></div>
       </CardHeader>
       <CardContent className="space-y-3">
         {list.length === 0 && <p className="rounded-lg border border-dashed py-10 text-center text-sm text-muted-foreground">Nenhum registro cadastrado.</p>}

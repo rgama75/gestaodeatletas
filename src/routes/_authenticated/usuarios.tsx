@@ -12,9 +12,9 @@ import { AthleteImportDialog } from "@/components/AthleteImportDialog";
 export const Route = createFileRoute("/_authenticated/usuarios")({
   head: () => ({
     meta: [
-      { title: "Equipe e permissões — ScoutHub" },
+      { title: "Configurações — ScoutHub" },
       { name: "description", content: "Defina quem é administrador, gestor ou scout." },
-      { property: "og:title", content: "Equipe e permissões — ScoutHub" },
+      { property: "og:title", content: "Configurações — ScoutHub" },
       { property: "og:description", content: "Controle de acesso da equipe." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -51,8 +51,8 @@ function Page() {
 
   return (
     <AppShell>
-      <div className="mb-2 flex flex-wrap items-center justify-between gap-4"><h1 className="font-display text-5xl font-bold uppercase">Equipe</h1><AthleteImportDialog /></div>
-      <p className="mb-6 text-muted-foreground">Novos cadastros entram como Scout. Administradores e gestores veem contratos, mercado e patrocinadores.</p>
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-4"><h1 className="font-display text-4xl font-bold uppercase sm:text-5xl">Configurações</h1><AthleteImportDialog /></div>
+      <p className="mb-6 text-muted-foreground">Equipe e permissões. Novos cadastros entram como Scout. Administradores e gestores veem contratos, mercado e patrocinadores.</p>
       <Card className="overflow-x-auto"><Table>
         <TableHeader><TableRow><TableHead>Nome</TableHead><TableHead>Permissão</TableHead></TableRow></TableHeader>
         <TableBody>{rows.map((r) => (
@@ -60,7 +60,7 @@ function Page() {
             <TableCell>{r.name}{r.id === userId && <span className="text-muted-foreground"> (você)</span>}</TableCell>
             <TableCell>
               <Select value={r.role} disabled={r.id === userId} onValueChange={(v) => change(r.id, v)}>
-                <SelectTrigger className="w-56"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-full min-w-44 sm:w-56"><SelectValue /></SelectTrigger>
                 <SelectContent>{Object.entries(LABEL).map(([k, l]) => <SelectItem key={k} value={k}>{l}</SelectItem>)}</SelectContent>
               </Select>
             </TableCell>
